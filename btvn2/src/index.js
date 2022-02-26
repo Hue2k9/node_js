@@ -1,6 +1,7 @@
 const express = require('express')
 const morgan = require('morgan')
 const app = express()
+app.use(express.json()) 
 const port = 3000
 
 app.use(morgan('combined'))
@@ -19,6 +20,7 @@ app.post('/users',(req, res) => {
    let user = req.body;
    data.push(user);
    res.send("User was added");
+   console.log(user);
 })
 
 app.put('/users/:id',(req, res) => {
