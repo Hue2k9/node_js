@@ -1,9 +1,21 @@
-//const Course = require("../../../NodeJS_HIT/models/courseModel");
-const courses = require("../database/courses");
+const express= require("express");
+//const courses = require("../database/courses");
 const Course = require("../models/courseModel");
+const courseRouter=express.Router();
+
 const getAllCourses = async (req, res) => {
-    const courses = await Course.find();
-    res.json(courses);
+    try{
+        const courses = await Course.find();
+        res.status(200).json({
+            status: "success",
+            data: courses,
+        });
+    } catch(err){
+        res.status(404).json({
+            status: "fail",
+            message:err,
+        })
+    }
 };
 
 const getCourse = async (req, res) => {

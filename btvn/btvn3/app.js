@@ -5,11 +5,12 @@ const app = express();
 app.use(express.json()); //middleware
 
 // import router
-//const courseRouter = require("./controllers/coursesController");
+const courseRouter = require("./routes/courseRoutes");
 const userRouter = require("./routes/userRoutes");
-//.connect("mongodb://localhost/courses")
+
+
 mongoose
-  .connect("mongodb://127.0.0.1:27017")
+  .connect("mongodb://127.0.0.1:27017/hit_courses")
   .then(() => {
       console.log("Connected to database");
   })
@@ -20,7 +21,7 @@ mongoose
 
  // App router
 app.use("/users",userRouter);
-//app.use("/courses",courseRouter);
+app.use("/courses",courseRouter);
 
 app.listen(port,()=>{
     console.log(`app listening on port http://localhost:${port}`);

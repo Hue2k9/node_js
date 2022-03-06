@@ -2,9 +2,11 @@ const mongoose = require("mongoose");
 
 // create schema
 const courseSchema = new mongoose.Schema({
-    title: String,
+    id: Number,
+    name: String,
+    leader: String,
     price: Number,
-    teacher: String,
+    year: Number,
 });
 // create model
 const Course = mongoose.model("Course", courseSchema);
