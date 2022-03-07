@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 // create schema
 const courseSchema = new mongoose.Schema({
-    id: Number,
     name: String,
     leader: String,
     price: Number,

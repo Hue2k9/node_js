@@ -19,26 +19,54 @@ const getAllCourses = async (req, res) => {
 };
 
 const getCourse = async (req, res) => {
-    const {id} = req.params;
+    try{
+        const {id} = req.params;
     const course = await Course.findById(id);
     res.json(course);
+    } catch(err){
+        res.status(404).json({
+            status: "fail",
+            message: err,
+        });
+    }
 };
 
 const createCourse = async (req, res) => {
-    const newCourse = await Course.create(req.body);
+    try{
+        const newCourse = await Course.create(req.body);
     res.json(newCourse);
+    } catch(err){
+        res.status(404).json({
+            status:"fail",
+            message: err,
+        });
+    }
 };
 
 const updateCourse = async (req, res) => {
-    let {id} = req.params;
+    try{
+        let {id} = req.params;
     const course = await Course.findByIdAndUpdate(id, req.body);
     res.json(course);
+    } catch(err){
+        res.status(404).json({
+            status: "fail",
+            message: err,
+        });
+    }
 };
 
 const deleteCourse = async (req, res) => {
-   let {id} = req.params;
-   const course = await Course.findByIdAndDelete(id);
-   res.json(null);
+   try{
+    let {id} = req.params;
+    const course = await Course.findByIdAndDelete(id);
+    res.json(null);
+   } catch (err){
+       res.status(404).json({
+           status: "fail",
+           message: err,
+       });
+   }
 };
 
 module.exports = {
