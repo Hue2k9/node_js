@@ -7,6 +7,7 @@ const courseSchema = new mongoose.Schema({
     price: Number,
     year: Number,
 });
+
 // create model
 const Course = mongoose.model("Course", courseSchema);
 

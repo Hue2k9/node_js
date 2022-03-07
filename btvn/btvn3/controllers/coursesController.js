@@ -1,5 +1,4 @@
 const express= require("express");
-//const courses = require("../database/courses");
 const Course = require("../models/courseModel");
 const courseRouter=express.Router();
 
@@ -47,7 +46,7 @@ const updateCourse = async (req, res) => {
     try{
         let {id} = req.params;
     const course = await Course.findByIdAndUpdate(id, req.body);
-    res.json(course);
+    res.send("Update sucessfully");
     } catch(err){
         res.status(404).json({
             status: "fail",
@@ -60,7 +59,7 @@ const deleteCourse = async (req, res) => {
    try{
     let {id} = req.params;
     const course = await Course.findByIdAndDelete(id);
-    res.json(null);
+    res.send("Delete Sucessfully");
    } catch (err){
        res.status(404).json({
            status: "fail",
