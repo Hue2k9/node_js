@@ -19,12 +19,10 @@ const getPostByPostId = asyncHandle(async (req, res) => {
 });
 
 const getPostByUserId = asyncHandle(async (req, res) => {
-    let {userId} = req.params;
-    const user = await User.findById(userId).populate('posts');
-    console.log(user)
-    res.json({
-        posts: (user.posts),
-    });
+    let id = req.params.author.ObjectId;
+    let posts = await Post.findById(id);
+    res.json(posts);
+    
 });
 
 module.exports={

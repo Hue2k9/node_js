@@ -14,8 +14,7 @@ userRouter
    .put(userController.updateUser)
    .delete(userController.deleteUser);
 
-userRouter
-   .route("/age")
-   .get(userController.findByAge);
+userRouter.route("/age").get(userController.findByAge);
+userRouter.route("/name").get(userController.findByName);
 
 module.exports = userRouter;
