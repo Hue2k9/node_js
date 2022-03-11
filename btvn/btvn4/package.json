@@ -1,0 +1,31 @@
+{
+  "name": "btvn4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hue2k9/node_js.git"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "Minh Hue",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hue2k9/node_js/issues"
+  },
+  "homepage": "https://github.com/Hue2k9/node_js#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "express": "^4.17.3",
+    "mongoose": "^6.2.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
