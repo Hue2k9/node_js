@@ -8,13 +8,13 @@ const userSchema = new Schema({
        required: [true, "This field is required"],
        minlength: [2, "Name must be at least 2 characters"],
    },
-   age: { type: Number, required: true, min: 5, max: 100},
+   age: Number,
    role:{
        type:  String,
        enum: ["user", "admin"],
    },
    password: String,
-   post:{ type:  Schema.Types.ObjectId, ref: 'Post'},
+   post:[{ type:  Schema.Types.ObjectId, ref: 'Post'}],
 });
 
 //Mã hóa password
