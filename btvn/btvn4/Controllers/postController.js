@@ -3,8 +3,14 @@ const User = require("../Models/User");
 const asyncHandle = require("../Middlewares/asyncHandle");
 
 const createPost = asyncHandle(async (req, res) => {
-    let post = await Post.create(req.body);
-    res.json(post);
+    const newPost = await Post.create(req.body);
+    res.json(newPost);
+    console.log(newPost);
+    const {id} = req.params;
+    const user = await User.findById(id);
+    console.log(user.posts);
+    user.posts.push(...newPost);
+    console.log(user);
 });
 
 const getAllPost = asyncHandle(async (req, res) => {
@@ -21,8 +27,7 @@ const getPostByPostId = asyncHandle(async (req, res) => {
 const getPostByUserId = asyncHandle(async (req, res) => {
     let id = req.params.author.ObjectId;
     let posts = await Post.findById(id);
-    res.json(posts);
-    
+    res.json(posts); 
 });
 
 module.exports={

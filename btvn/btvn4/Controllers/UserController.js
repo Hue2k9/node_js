@@ -1,10 +1,8 @@
 const User = require("../Models/User");
-const Post = require("../Models/Post");
 const asyncHandle = require("../Middlewares/asyncHandle");
 
 const getAllUsers = asyncHandle(async (req, res) => {
-    let posts = await Post.find();
-    let users = await User.find().populate("post");
+    let users = await User.find().populate('post');
     res.json(users);
 });
 
