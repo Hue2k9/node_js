@@ -6,11 +6,10 @@ const auth = require("../Middlewares/authMiddleware");
 postRouter
   .route("/")
   .get(postController.getAllPost);
-  
+
 postRouter
   .route("/:id")
   .post(postController.createPost)
-  .get(postController.getPostByPostId)
   .get(postController.getPostByUserId);
-
+//.get(postController.getPostByPostId)
 module.exports = postRouter;

@@ -8,13 +8,13 @@ userRouter
    .post(userController.addUser)
    .get(userController.getAllUsers);
 
+userRouter.get('/age',userController.findByAge);
+userRouter.get('/name',userController.findByName);
+
 userRouter
    .route("/:id")
    .get(userController.getUser)
    .put(userController.updateUser)
    .delete(userController.deleteUser);
-
-userRouter.route("/age").get(userController.findByAge);
-userRouter.route("/name").get(userController.findByName);
-
+  
 module.exports = userRouter;

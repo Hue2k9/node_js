@@ -1,24 +1,24 @@
 const User = require("../Models/User");
 const asyncHandle = require("../Middlewares/asyncHandle");
-const mongoose=require("mongoose");
+
 const getAllUsers = asyncHandle(async (req, res) => {
-    let users = await User.find();
+    let users = await User.find().populate("post");
     res.json(users);
 });
 
 const getUser = asyncHandle(async (req, res) => {
     let {id}= req.params;
-    let user = await User.findById(id);
+    let user = await User.findById(id).populate("post");
     res.json(user);
 });
 
 const findByAge = asyncHandle(async (req, res) => {
-    let users = await User.find({ age: { $gt: 18, $lt: 40 } });
-    res.json(users);
+    let users = await User.find({ age: { $gt: 18, $lt: 40 } }).populate("post");
+   res.json(users);
 });
 
 const findByName = asyncHandle(async (req, res) => {
-    let users = await User.find({name: /^h.*/});
+    let users = await User.find({ name: /^h/ }).populate("post");
     res.json(users);
 });
 

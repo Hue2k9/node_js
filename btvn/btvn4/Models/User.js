@@ -14,7 +14,7 @@ const userSchema = new Schema({
        enum: ["user", "admin"],
    },
    password: String,
-   post:[{ type:  Schema.Types.ObjectId, ref: 'Post'}],
+   post:[{ type:  Schema.Types.ObjectId, ref: 'posts'}],
 });
 
 //Mã hóa password
