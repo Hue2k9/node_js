@@ -8,13 +8,18 @@ const userSchema = new Schema({
     required: [true, "This field is required"],
     minlength: [2, "Name must be at least 2 characters"],
   },
+  username: {
+    type: String,
+    require: true,
+    unique: true,
+  },
   age: Number,
   role: {
     type: String,
     enum: ["user", "admin"],
+    default: "user",
   },
   password: String,
-  // post:[{ type:  Schema.Types.ObjectId, ref: 'posts'}],
 });
 
 //Mã hóa password
@@ -27,5 +32,10 @@ userSchema.pre("save", async function (next) {
   }
   next();
 });
+
+userSchema.methods.isPasswordMatch = async function (password) {
+  const user = this;
+  return bcrypt.compare(password, user.password);
+};
 
 module.exports = mongoose.model("users", userSchema);

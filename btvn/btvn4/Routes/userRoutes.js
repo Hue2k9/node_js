@@ -3,11 +3,10 @@ const userController = require("../Controllers/UserController");
 const userRouter = express.Router();
 const authMiddleware = require("../Middlewares/authMiddleware");
 
-userRouter.route("/").post(userController.addUser);
-
 userRouter
-  .route("/:id/getall")
-  .get(authMiddleware.authorization, userController.getAllUsers);
+  .route("/")
+  .post(userController.addUser)
+  .get(userController.getAllUsers);
 
 userRouter
   .route("/:id")
