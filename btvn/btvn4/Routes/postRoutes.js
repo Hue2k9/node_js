@@ -1,13 +1,13 @@
 const express = require("express");
 const postController = require("../Controllers/postController");
 const postRouter = express.Router();
-const auth = require("../Middlewares/authMiddleware");
+const { authenticateToken } = require("../Middlewares/authMiddleware");
 
-postRouter.route("/").get(auth.authenticateToken, postController.getAllPost);
+postRouter.route("/").get(authenticateToken, postController.getAllPost);
 
 postRouter
   .route("/:id")
-  .post(auth.authenticateToken, postController.createPost)
-  .get(auth.authenticateToken, postController.getPostByUserId);
+  .post(authenticateToken, postController.createPost)
+  .get(authenticateToken, postController.getPostByUserId);
 
 module.exports = postRouter;
