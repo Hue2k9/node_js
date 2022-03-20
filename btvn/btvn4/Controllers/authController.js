@@ -7,12 +7,13 @@ module.exports.login = asyncHandle(async (req, res) => {
 
   const user = await User.findOne({ username });
   if (!user) {
-    return res.send("Nguoi dung khong ton tai");
+    return res.send("Người dùng không tồn tại");
   }
   if (!(await user.isPasswordMatch(password))) {
-    return res.send("Tai khoan hoac mat khau khong chinh xac");
+    return res.send("Tài khoản hoặc mật khẩu không chính xác");
   }
-  const token = jwt.sign({ username }, "huexinhdep", { expiresIn: "30m" });
-
+  const token = jwt.sign({ username }, process.env.SECRET_KEY, {
+    expiresIn: "30m",
+  });
   res.status(200).json({ token });
 });

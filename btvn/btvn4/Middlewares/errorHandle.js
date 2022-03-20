@@ -2,9 +2,9 @@ const ErrorResponse = require("../common/ErrorResponse");
 const errorHandle = (err, req, res, next) => {
   let error = { ...err };
   error.message = err.message;
-  //log error on dev
+
   console.log(err.stack);
-  //Mongodb duplicate value key
+
   if (err.code === 11000) {
     error = new ErrorResponse("Dữ liệu trùng", 400);
   }
