@@ -1,8 +1,6 @@
 const jwt = require("jsonwebtoken");
 const User = require("../Models/User");
 const asyncHandle = require("../Middlewares/asyncHandle");
-const dotenv = require("dotenv");
-dotenv.config();
 module.exports.login = asyncHandle(async (req, res) => {
   const { username, password } = req.body;
 
