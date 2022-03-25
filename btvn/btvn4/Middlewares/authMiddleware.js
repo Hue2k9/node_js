@@ -15,6 +15,7 @@ module.exports.authorization = async function (req, res, next) {
   next();
 };
 
+//protect
 module.exports.authenticateToken = asyncHandle(async (req, res, next) => {
   let token;
   if (
