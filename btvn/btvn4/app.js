@@ -22,18 +22,6 @@ app.set("view engine", "ejs");
 app.set("views", "./resources/views");
 
 router(app);
-//render ra main page
-app.get("/home", (req, res) => {
-  res.render("pages/index.ejs");
-});
-
-// app.get("/change", (req, res) => {
-//   res.render("pages/ChangePassword/changePassword.ejs");
-// });
-
-// app.get("/sendemail", (req, res) => {
-//   res.render("pages/ChangePassword/sendEmail.ejs");
-// });
 
 app.listen(port, () => {
   console.log(`App listening on port http://localhost:${port}`);
