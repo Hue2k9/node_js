@@ -6,12 +6,12 @@ router.route("/login").post(authController.login);
 
 router
   .route("/forgot-password")
-  .get(authController.forgotPassword)
+  .get(authController.forgotPasswordView)
   .post(authController.forgotPassword);
 
 router
   .route("/change-password")
-  .get(authController.changePassword)
+  .get(authController.changePasswordView)
   .post(authController.changePassword);
 
 module.exports = router;

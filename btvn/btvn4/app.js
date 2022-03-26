@@ -1,31 +1,27 @@
 const express = require("express");
-const db = require("./config/db");
+const path = require("path");
+const dotenv = require("dotenv");
+const methodOverride = require("method-override");
 const app = express();
 const port = 3000;
+
 const router = require("./Routes/index");
 const errorHandle = require("./Middlewares/errorHandle");
-const path = require("path");
-app.use(express.json());
-const dotenv = require("dotenv");
+const db = require("./config/db");
+
 dotenv.config();
-const bodyParser = require("body-parser");
-const methodOverride = require("method-override");
+app.use(express.json());
 app.use(methodOverride("_method"));
 app.use("/static", express.static("public"));
-router(app);
 app.use(errorHandle);
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-  })
-);
+
 app.use(express.static(path.join(__dirname, "public")));
-app.use(express.urlencoded()); //middleware de xu ly dang form
-app.use(express.json()); //Dang gui tu code js len có express.json()
+app.use(express.urlencoded({ extended: true })); //middleware de xu ly dang form
 
 app.set("view engine", "ejs");
 app.set("views", "./resources/views");
 
+router(app);
 //render ra main page
 app.get("/home", (req, res) => {
   res.render("pages/index.ejs");

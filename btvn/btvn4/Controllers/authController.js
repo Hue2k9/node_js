@@ -21,23 +21,30 @@ module.exports.login = asyncHandle(async (req, res) => {
 });
 
 module.exports.forgotPassword = asyncHandle(async (req, res) => {
-  res.render("pages/ChangePassword/sendEmail.ejs");
   const { email } = req.body;
+
+  console.log(req.body);
   if (!email) return res.send("Vui long nhap email");
   const user = await User.findOne({ email });
 
   if (!user) return res.send("Nguoi dung khong ton tai");
   let code = await user.getResetPasswordToken();
   await user.save({ validateBeforeSave: false });
-  res
-    .status(200)
-    .redirect(`${process.env.HOST}/api/auth/change-password?code=${code}`);
-  // .json({ url: `${process.env.HOST}/auth/change-password?code=${code}` });
+
+  res.send(`localhost:3000/api/auth/change-password?code=${code}`);
+});
+
+module.exports.forgotPasswordView = asyncHandle(async (req, res) => {
+  res.render("pages/ChangePassword/sendEmail.ejs");
+});
+
+module.exports.changePasswordView = asyncHandle(async (req, res) => {
+  const { code } = req.query;
+  res.render("pages/ChangePassword/changePassword.ejs", { code });
 });
 
 module.exports.changePassword = asyncHandle(async (req, res, next) => {
   const { code } = req.query;
-  res.render("pages/ChangePassword/changePassword.ejs", { data: code });
   const user = await User.findOne({
     resetPasswordToken: code,
     resetPasswordExpire: { $gt: Date.now() },
@@ -49,9 +56,13 @@ module.exports.changePassword = asyncHandle(async (req, res, next) => {
 
   // Set new password
   user.password = req.body.password;
+  let passwordagain = req.body.passwordagain;
+
+  if (user.password != passwordagain)
+    res.status(400).send("Mat khau phai trung khop");
+
   user.resetPasswordToken = undefined;
   user.resetPasswordExpire = undefined;
   await user.save();
   res.send("change  password successfuly");
-  //res.redirect("pages/index");
 });
