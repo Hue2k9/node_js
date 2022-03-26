@@ -21,6 +21,7 @@ module.exports.login = asyncHandle(async (req, res) => {
 });
 
 module.exports.forgetPassword = asyncHandle(async (req, res) => {
+  res.render("pages/ChangePassword/sendEmail.ejs");
   const { email } = req.body;
   if (!email) return res.send("Vui long nhap email");
   const user = await User.findOne({ email });
@@ -31,7 +32,8 @@ module.exports.forgetPassword = asyncHandle(async (req, res) => {
   await user.save({ validateBeforeSave: false });
   res
     .status(200)
-    .json({ url: `${process.env.HOST}/auth/change-password?code=${code}` });
+    .redirect(`${process.env.HOST}/auth/change-password?code=${code}`);
+  // .json({ url: `${process.env.HOST}/auth/change-password?code=${code}` });
 });
 
 module.exports.changePassword = asyncHandle(async (req, res, next) => {
@@ -51,4 +53,5 @@ module.exports.changePassword = asyncHandle(async (req, res, next) => {
   user.resetPasswordExpire = undefined;
   await user.save();
   res.send("change  password successfuly");
+  //res.redirect("pages/index");
 });

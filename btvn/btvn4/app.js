@@ -8,12 +8,17 @@ const path = require("path");
 app.use(express.json());
 const dotenv = require("dotenv");
 dotenv.config();
-// const cookieParser = require("cookie-parser");
-// app.use(cookieParser);
+const bodyParser = require("body-parser");
+const methodOverride = require("method-override");
+app.use(methodOverride("_method"));
 app.use("/static", express.static("public"));
 router(app);
 app.use(errorHandle);
-
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded()); //middleware de xu ly dang form
 app.use(express.json()); //Dang gui tu code js len có express.json()
@@ -26,13 +31,13 @@ app.get("/home", (req, res) => {
   res.render("pages/index.ejs");
 });
 
-app.get("/change", (req, res) => {
-  res.render("pages/ChangePassword/changePassword.ejs");
-});
+// app.get("/change", (req, res) => {
+//   res.render("pages/ChangePassword/changePassword.ejs");
+// });
 
-app.get("/sendemail", (req, res) => {
-  res.render("pages/ChangePassword/sendEmail.ejs");
-});
+// app.get("/sendemail", (req, res) => {
+//   res.render("pages/ChangePassword/sendEmail.ejs");
+// });
 
 app.listen(port, () => {
   console.log(`App listening on port http://localhost:${port}`);
