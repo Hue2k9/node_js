@@ -6,14 +6,14 @@ const app = express();
 const port = 3000;
 
 const router = require("./Routes/index");
-const errorHandle = require("./Middlewares/errorHandle");
+const ErrorResponse = require("./common/ErrorResponse");
 const db = require("./config/db");
 
 dotenv.config();
 app.use(express.json());
 app.use(methodOverride("_method"));
 app.use("/static", express.static("public"));
-app.use(errorHandle);
+// app.use(ErrorResponse);
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true })); //middleware de xu ly dang form
